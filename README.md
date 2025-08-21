@@ -50,3 +50,8 @@ court("Zane", 1, "Mark Hank Ana Vivian");  // 150
 A simple benchmark is included to test performance with 1e6 iterations.
 
 ---
+
+## Links
+
+* **GitHub Repo:** [https://github.com/David-Horjet/Kagi-Tasks](https://github.com/David-Horjet/Kagi-Tasks)
+* **Live Preview:** [https://david-horjet.github.io/Kagi-Tasks/task1.html](https://david-horjet.github.io/Kagi-Tasks/task1.html)
