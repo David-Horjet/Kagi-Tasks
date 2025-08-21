@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Widgets</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .recipe-widget {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            min-width: 300px;
+            flex: 1;
+        }
+
+        .recipe-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Checkbox Recipe Widget Styles */
+        .ingredient-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ingredient-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .ingredient-item input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: #007bff;
+        }
+
+        /* CSS-only Show More/Less Implementation */
+        .expand-toggle {
+            display: none;
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .expand-toggle:checked + .expandable-content {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .show-toggle {
+            display: block;
+            background: none;
+            border: none;
+            color: #007bff;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 12px 0;
+            text-align: center;
+            width: 100%;
+            border-top: 1px solid #eee;
+            margin-top: 8px;
+        }
+
+        .show-toggle:hover {
+            color: #0056b3;
+            background-color: #f8f9fa;
+        }
+
+        .show-more-text {
+            display: block;
+        }
+
+        .show-less-text {
+            display: none;
+        }
+
+        .expand-toggle:checked ~ .show-toggle .show-more-text {
+            display: none;
+        }
+
+        .expand-toggle:checked ~ .show-toggle .show-less-text {
+            display: block;
+        }
+
+        /* Text Recipe Widget Styles */
+        .recipe-text {
+            line-height: 1.6;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .recipe-text p {
+            margin-bottom: 12px;
+        }
+
+        .text-expandable {
+            max-height: 240px; /* Approximately 10 lines */
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .text-expand-toggle:checked + .text-expandable {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .text-expand-toggle {
+            display: none;
+        }
+
+        .text-expand-toggle:checked ~ .show-toggle .show-more-text {
+            display: none;
+        }
+
+        .text-expand-toggle:checked ~ .show-toggle .show-less-text {
+            display: block;
+        }
+
+        /* Alternative layout for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="recipe-widget">
+            <h2 class="recipe-title">Meat Lasagna Recipe</h2>
+            
+            <ul class="ingredient-list">
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient1">
+                    <label for="ingredient1">1 pound sweet Italian sausage</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient2">
+                    <label for="ingredient2">3/4 pound lean ground beef</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient3">
+                    <label for="ingredient3">1/2 cup minced onion</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient4">
+                    <label for="ingredient4">2 cloves garlic, crushed</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient5">
+                    <label for="ingredient5">1 (28 ounce) can crushed tomatoes</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient6">
+                    <label for="ingredient6">2 (6 ounce) cans tomato paste</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient7">
+                    <label for="ingredient7">2 (6.5 ounce) cans canned tomato sauce</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient8">
+                    <label for="ingredient8">1/2 cup water</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient9">
+                    <label for="ingredient9">2 tablespoons white sugar</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient10">
+                    <label for="ingredient10">1 1/2 teaspoons dried basil leaves</label>
+                </li>
+            </ul>
+
+            <input type="checkbox" id="expand1" class="expand-toggle">
+            <ul class="expandable-content ingredient-list">
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient11">
+                    <label for="ingredient11">1/2 teaspoon fennel seeds</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient12">
+                    <label for="ingredient12">1 teaspoon Italian seasoning</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient13">
+                    <label for="ingredient13">1 1/2 teaspoons salt, divided, or to taste</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient14">
+                    <label for="ingredient14">1/4 teaspoon ground black pepper</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient15">
+                    <label for="ingredient15">4 tablespoons chopped fresh parsley</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient16">
+                    <label for="ingredient16">12 lasagna noodles</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient17">
+                    <label for="ingredient17">16 ounces ricotta cheese</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient18">
+                    <label for="ingredient18">1 egg</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient19">
+                    <label for="ingredient19">3/4 pound mozzarella cheese, sliced</label>
+                </li>
+                <li class="ingredient-item">
+                    <input type="checkbox" id="ingredient20">
+                    <label for="ingredient20">3/4 cup grated Parmesan cheese</label>
+                </li>
+            </ul>
+
+            <label for="expand1" class="show-toggle">
+                <span class="show-more-text">Show more</span>
+                <span class="show-less-text">Show less</span>
+            </label>
+        </div>
+
+        <div class="recipe-widget">
+            <h2 class="recipe-title">Classic Beef Stew Recipe</h2>
+            
+            <input type="checkbox" id="expand2" class="text-expand-toggle">
+            <div class="text-expandable recipe-text">
+                <p>Heat oil in a large pot over medium-high heat. Season beef with salt and pepper, then brown on all sides.</p>
+                <p>Add onions and cook until softened, about 5 minutes. Stir in garlic and cook for another minute.</p>
+                <p>Sprinkle flour over the meat and vegetables, stirring to coat everything evenly.</p>
+                <p>Gradually add beef broth while stirring to prevent lumps from forming.</p>
+                <p>Add tomato paste, Worcestershire sauce, and bay leaves. Bring to a boil.</p>
+                <p>Add potatoes, carrots, and celery to the pot. Season with thyme and additional salt and pepper.</p>
+                <p>Reduce heat to low, cover, and simmer for 1.5 to 2 hours until meat is tender.</p>
+                <p>In the last 30 minutes, add frozen peas and pearl onions if using.</p>
+                <p>Taste and adjust seasoning as needed. Remove bay leaves before serving.</p>
+                <p>For a thicker stew, mix 2 tablespoons of cornstarch with cold water to make a slurry.</p>
+                <p>Stir the cornstarch slurry into the stew and simmer for 5-10 minutes until thickened.</p>
+                <p>Garnish with fresh parsley before serving. This stew pairs perfectly with crusty bread.</p>
+                <p>Leftovers can be stored in the refrigerator for up to 3 days or frozen for up to 3 months.</p>
+                <p>When reheating, add a little broth or water if the stew has thickened too much.</p>
+                <p>For extra flavor, consider adding a splash of red wine when browning the meat.</p>
+                <p>This recipe serves 6-8 people and is perfect for cold winter evenings.</p>
+            </div>
+
+            <label for="expand2" class="show-toggle">
+                <span class="show-more-text">Show more</span>
+                <span class="show-less-text">Show less</span>
+            </label>
+        </div>
+    </div>
+</body>
+</html>
